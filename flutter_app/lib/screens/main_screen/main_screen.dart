@@ -9,18 +9,24 @@ class MainScreen extends StatelessWidget {
     MainScreenProvider _state = Provider.of<MainScreenProvider>(context);
     return Scaffold(
         body: GestureDetector(
-          child: AnimatedContainer(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: _state.screenColor,
-            child: Center(child: Text('Hey there', style:
-            GoogleFonts.pacifico(fontSize: 40, color: Colors.white)),),
-            duration: Duration(milliseconds: 750),
+      child: AnimatedContainer(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        color: _state.getScreenColor(),
+        child: Center(
+          child: GestureDetector(
+            child: Text(
+              'Hey there',
+              style: GoogleFonts.pacifico(fontSize: 40, color: _state.getTextColor()),
+            ),
+            onTap: (){_state.changeTextColor();},
           ),
-          onTap: (){
-            _state.changeScreenColor();
-          },
-        )
-    );
+        ),
+        duration: Duration(milliseconds: 750),
+      ),
+      onTap: () {
+        _state.changeScreenColor();
+      },
+    ));
   }
 }
